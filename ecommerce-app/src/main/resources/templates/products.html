@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products</title>
+</head>
+<body>
+<h1>Products</h1>
+<form method="get" th:action="@{/products}">
+    <input type="text" name="search" th:value="${search}" placeholder="Search products"/>
+    <button type="submit">Search</button>
+</form>
+
+<form method="post" th:action="@{/products}">
+    <input type="text" name="name" placeholder="Name" required/>
+    <input type="text" name="description" placeholder="Description"/>
+    <input type="number" step="0.01" name="price" placeholder="Price"/>
+    <button type="submit">Add</button>
+</form>
+
+<table>
+    <tr><th>Name</th><th>Description</th><th>Price</th><th>Action</th></tr>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.description}"></td>
+        <td th:text="${p.price}"></td>
+        <td>
+            <form th:action="@{'/products/delete/' + ${p.id}}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h2>Chatbot</h2>
+<div id="chat"></div>
+<input type="text" id="message" placeholder="Type a message"/>
+<button onclick="send()">Send</button>
+
+<script>
+function send() {
+  const msg = document.getElementById('message').value;
+  fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: msg
+  })
+    .then(r => r.text())
+    .then(t => {
+        const div = document.getElementById('chat');
+        div.innerHTML += '<p><b>You:</b> ' + msg + '</p>';
+        div.innerHTML += '<p><b>Bot:</b> ' + t + '</p>';
+        document.getElementById('message').value='';
+    });
+}
+</script>
+
+</body>
+</html>
