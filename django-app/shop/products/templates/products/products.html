@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <script>
+        async function sendChat() {
+            const message = document.getElementById('chat-input').value;
+            const response = await fetch('/chat/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ message })
+            });
+            const data = await response.json();
+            document.getElementById('chat-response').innerText = data.response;
+        }
+    </script>
+</head>
+<body>
+<h1>Products</h1>
+<form method="get">
+    <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}"/>
+    <button type="submit">Search</button>
+</form>
+<ul>
+    {% for product in products %}
+        <li>{{ product.name }} - {{ product.price }}
+            <a href="{% url 'delete_product' product.pk %}">delete</a>
+        </li>
+    {% empty %}
+        <li>No products</li>
+    {% endfor %}
+</ul>
+<h2>Add Product</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add</button>
+</form>
+<h2>Chatbot</h2>
+<input type="text" id="chat-input" />
+<button onclick="sendChat()">Send</button>
+<p id="chat-response"></p>
+</body>
+</html>
