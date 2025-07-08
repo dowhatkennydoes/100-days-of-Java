@@ -63,3 +63,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Path to optional Firebase service account
+FIREBASE_CREDENTIALS = BASE_DIR / 'firebase_credentials.json'
