@@ -6,9 +6,10 @@ This repository contains a sample ecommerce CMS implemented with Django.
 
 The app provides CRUD functionality for products, a search form, and a small chatbot for basic assistance. It uses SQLite by default so it runs without additional setup.
 
-Run migrations and start the server with:
+Run migrations and start the server from the `django-app` directory:
 
 ```bash
+cd django-app
 python manage.py migrate
 python manage.py runserver
 ```
