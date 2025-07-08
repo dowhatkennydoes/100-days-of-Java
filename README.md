@@ -1,24 +1,10 @@
 # 100-days-of-Java
 
-## Ecommerce Apps
+## Django Ecommerce CMS
 
-This repository contains two sample ecommerce CMS implementations.
+This repository contains a sample ecommerce CMS implemented with Django.
 
-### Spring Boot Version
-
-A minimal Spring Boot based CMS with search and a rule-based chatbot.
-
-Run with:
-
-```bash
-mvn -f ecommerce-app/pom.xml spring-boot:run
-```
-
-Visit `http://localhost:8080/products` to interact with the Java app.
-
-### Django Version
-
-A similar application implemented with Django.
+The app provides CRUD functionality for products, a search form, and a small chatbot for basic assistance. It uses SQLite by default so it runs without additional setup.
 
 Run migrations and start the server with:
 
@@ -27,4 +13,4 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Then visit `http://localhost:8000/products/` for the Python version.
+Then visit `http://localhost:8000/products/` to manage products and chat with the bot.
